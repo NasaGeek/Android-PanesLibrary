@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.mapsaurus.panelayout.R;
 import com.mapsaurus.paneslayout.PanesSizer.PaneSizer;
 
 public abstract class PanesActivity extends SherlockFragmentActivity implements FragmentLauncher{
@@ -24,11 +25,7 @@ public abstract class PanesActivity extends SherlockFragmentActivity implements 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		int screenSize = (getResources().getConfiguration().screenLayout
-				& Configuration.SCREENLAYOUT_SIZE_MASK);
-
-		if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE ||
-				screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+		if (getResources().getBoolean(R.bool.largeScreen)) {
 			mDelegate = new TabletDelegate(this);
 		} else {
 			mDelegate = new PhoneDelegate(this);
