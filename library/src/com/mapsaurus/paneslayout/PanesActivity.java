@@ -137,6 +137,13 @@ public abstract class PanesActivity extends SherlockFragmentActivity implements 
 	public void showMenu() {
 		mDelegate.showMenu();
 	}
+	
+	/**
+	 * Show the content
+	 */
+	public void showContent() {
+		mDelegate.showContent();
+	}
 
 	/* *********************************************************************
 	 * Setup tablet or phone delegates

@@ -70,6 +70,11 @@ public abstract class ActivityDelegate {
 	 */
 	public abstract void showMenu();
 
+	/**
+	 * Show the content
+	 */
+	public abstract void showContent();
+	
 	/* *********************************************************************
 	 * Deal with over-riding activity methods
 	 * ********************************************************************* */

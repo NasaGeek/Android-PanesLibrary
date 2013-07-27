@@ -191,5 +191,10 @@ public class PhoneDelegate extends ActivityDelegate implements OnBackStackChange
 	public void showMenu() {
 		drawer.openDrawer(GravityCompat.START);
 	}
+	
+	@Override
+	public void showContent() {
+		drawer.closeDrawer(GravityCompat.START);
+	}
 
 }

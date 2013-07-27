@@ -243,4 +243,12 @@ public class TabletDelegate extends ActivityDelegate implements PanesLayout.OnIn
 		panesLayout.setIndex(0);
 	}
 
+	@Override
+	public void showContent() {
+		if(panesLayout.getNumPanes() > 1)
+			panesLayout.setIndex(1);
+		else
+			throw new IllegalStateException("You can't call showContent()" +
+					" when there's no content to show.");
+	}
 }
