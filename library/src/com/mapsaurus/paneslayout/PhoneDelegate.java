@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuItem;
-import com.mapsaurus.panelayout.R;
+import com.mapsaurus.paneslayout.R;
 
 import android.app.SearchManager;
 import android.content.Intent;

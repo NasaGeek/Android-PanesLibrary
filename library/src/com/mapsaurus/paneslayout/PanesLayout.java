@@ -3,7 +3,7 @@ package com.mapsaurus.paneslayout;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-import com.mapsaurus.panelayout.R;
+import com.mapsaurus.paneslayout.R;
 import com.mapsaurus.paneslayout.PanesSizer.PaneSizer;
 
 import android.content.Context;

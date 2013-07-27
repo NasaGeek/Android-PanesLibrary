@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.view.MenuItem;
-import com.mapsaurus.panelayout.R;
+import com.mapsaurus.paneslayout.R;
 import com.mapsaurus.paneslayout.PanesLayout.OnIndexChangedListener;
 import com.mapsaurus.paneslayout.PanesLayout.PaneView;
 import com.mapsaurus.paneslayout.PanesSizer.PaneSizer;

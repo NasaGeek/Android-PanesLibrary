@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
-import com.mapsaurus.panelayout.R;
+import com.mapsaurus.paneslayout.R;
 import com.mapsaurus.paneslayout.PanesSizer.PaneSizer;
 
 public abstract class PanesActivity extends SherlockFragmentActivity implements FragmentLauncher{
