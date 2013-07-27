@@ -11,6 +11,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -20,6 +21,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SlidingPaneLayout;
+import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
 import android.util.Log;
 import android.view.ActionProvider;
 import android.view.SubMenu;
@@ -32,9 +35,8 @@ import android.widget.Toast;
 
 public class PhoneDelegate extends ActivityDelegate implements OnBackStackChangedListener {
 
-	private ActionBarDrawerToggle drawerToggle;
-	private DrawerLayout drawer;
-
+	private SlidingPaneLayout spl;
+	
 	public PhoneDelegate(PanesActivity a) {
 		super(a);
 	}
@@ -47,43 +49,33 @@ public class PhoneDelegate extends ActivityDelegate implements OnBackStackChange
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		
-		drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		drawer.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+		int menuOffset = getResources().getDimensionPixelSize(R.dimen.menu_offset);
 		
-		drawerToggle = new ActionBarDrawerToggle(
-				getActivity(), drawer, R.drawable.ic_drawer,
-				R.string.drawer_open, R.string.drawer_close) {
-			public void onDrawerClosed(View view) {
-				supportInvalidateOptionsMenu();
-				// creates call to onPrepareOptionsMenu()
+		spl = (SlidingPaneLayout) findViewById(R.id.slidingpane_layout);
+		spl.setShadowResource(R.drawable.shadow_left);
+		spl.setParallaxDistance(menuOffset);
+		spl.setCoveredFadeColor(Color.parseColor("#88000000"));
+		spl.setSliderFadeColor(Color.parseColor("#00000000"));
+		spl.setPanelSlideListener(new PanelSlideListener() {
+			
+			@Override
+			public void onPanelSlide(View arg0, float arg1) {
+				
 			}
-
-			public void onDrawerOpened(View drawerView) {
-				supportInvalidateOptionsMenu();
-				// creates call to onPrepareOptionsMenu()
+			
+			@Override
+			public void onPanelOpened(View arg0) {
+				
 			}
-		};
-		drawer.setDrawerListener(drawerToggle);
-
+			
+			@Override
+			public void onPanelClosed(View arg0) {
+				
+			}
+		});
+		
 		FragmentManager fm = getSupportFragmentManager();
 		fm.addOnBackStackChangedListener(this);
-	}
-
-	/**
-	 * When using the ActionBarDrawerToggle, you must call it during
-	 * onPostCreate() and onConfigurationChanged()...
-	 */
-
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		// Sync the toggle state after onRestoreInstanceState has occurred.
-		drawerToggle.syncState();
-	}
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		// Pass any configuration change to the drawer toggles
-		drawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	/* *********************************************************************
@@ -92,35 +84,36 @@ public class PhoneDelegate extends ActivityDelegate implements OnBackStackChange
 
 	@Override
 	public boolean onBackPressed() {
-		return false;
+		FragmentManager fm = getSupportFragmentManager();
+
+		if (!spl.isOpen()) {
+			if (fm.getBackStackEntryCount() > 0) {
+				return false;
+			} else {
+				spl.openPane();
+				return true;
+			}
+		} else {
+			getActivity().finish();
+			return true;
+		}
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			// drawer enabled
-			if (drawerToggle.isDrawerIndicatorEnabled()) {
-				// The action bar home/up action should open or close the drawer.
-				// ActionBarDrawerToggle will take care of this.
-				if (drawerToggle.onOptionsItemSelected(new MenuItemWrapper(item))) 
-					return true;
-			} else {
-				clearFragments();
-				return true;
-			}
+			if (!spl.isOpen())
+				spl.openPane();
+			else
+				onBackPressed();
+			return true;
 		}
-
 		return false;
 	}
 	
 	@Override
 	public void onBackStackChanged() {
-		FragmentManager fm = getSupportFragmentManager();
-		int count = fm.getBackStackEntryCount();
-		if (count > 0)
-			drawerToggle.setDrawerIndicatorEnabled(false);
-		else
-			drawerToggle.setDrawerIndicatorEnabled(true);
+
 	}
 
 	/* *********************************************************************
@@ -142,7 +135,7 @@ public class PhoneDelegate extends ActivityDelegate implements OnBackStackChange
 			addToBackStack = true;
 		}
 
-		drawer.closeDrawer(GravityCompat.START);
+		if (spl.isOpen()) spl.closePane();
 
 		if (newFragment != null) {
 			FragmentManager fm = getSupportFragmentManager();
@@ -189,12 +182,12 @@ public class PhoneDelegate extends ActivityDelegate implements OnBackStackChange
 
 	@Override
 	public void showMenu() {
-		drawer.openDrawer(GravityCompat.START);
+		spl.openPane();
 	}
 	
 	@Override
 	public void showContent() {
-		drawer.closeDrawer(GravityCompat.START);
+		spl.closePane();
 	}
 
 }
