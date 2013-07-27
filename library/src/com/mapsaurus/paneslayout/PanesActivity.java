@@ -118,14 +118,14 @@ public abstract class PanesActivity extends SherlockFragmentActivity implements 
 	}
 
 	/**
-	 * Get menu framgent
+	 * Get menu fragment
 	 */
 	public Fragment getMenuFragment() {
 		return mDelegate.getMenuFragment();
 	}
 
 	/**
-	 * Get top framgent
+	 * Get top fragment
 	 */
 	public Fragment getTopFragment() {
 		return mDelegate.getTopFragment();

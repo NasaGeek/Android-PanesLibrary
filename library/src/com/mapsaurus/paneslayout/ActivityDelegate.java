@@ -56,12 +56,12 @@ public abstract class ActivityDelegate {
 	public abstract void clearFragments();
 
 	/**
-	 * Get menu framgent
+	 * Get menu fragment
 	 */
 	public abstract Fragment getMenuFragment();
 
 	/**
-	 * Get top framgent
+	 * Get top fragment
 	 */
 	public abstract Fragment getTopFragment();
 
