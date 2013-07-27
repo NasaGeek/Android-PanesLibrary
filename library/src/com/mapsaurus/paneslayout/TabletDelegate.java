@@ -217,7 +217,7 @@ public class TabletDelegate extends ActivityDelegate implements PanesLayout.OnIn
 		return -1;
 	}
 
-	private Fragment getFragment(int index) {
+	public Fragment getFragment(int index) {
 		if (index < fragmentStack.size() && index >= 0)
 			return fragmentStack.get(index);
 

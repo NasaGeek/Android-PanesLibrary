@@ -156,4 +156,11 @@ public abstract class PanesActivity extends SherlockFragmentActivity implements 
 		if (mDelegate instanceof TabletDelegate)
 			((TabletDelegate) mDelegate).setPaneSizer(sizer);
 	}
+	
+	public Fragment getFragment(int index) {
+		if (mDelegate instanceof TabletDelegate)
+			return ((TabletDelegate) mDelegate).getFragment(index);
+		else
+			throw new IllegalStateException("Can't call getFragment() when you're on a phone.");
+	}
 }
