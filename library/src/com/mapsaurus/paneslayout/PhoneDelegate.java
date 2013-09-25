@@ -59,17 +59,17 @@ public class PhoneDelegate extends ActivityDelegate implements OnBackStackChange
 		spl.setPanelSlideListener(new PanelSlideListener() {
 			
 			@Override
-			public void onPanelSlide(View arg0, float arg1) {
+			public void onPanelSlide(View panel, float offset) {
 				
 			}
 			
 			@Override
-			public void onPanelOpened(View arg0) {
+			public void onPanelOpened(View panel) {
 				
 			}
 			
 			@Override
-			public void onPanelClosed(View arg0) {
+			public void onPanelClosed(View panel) {
 				
 			}
 		});
